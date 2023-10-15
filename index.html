@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LoL Picker</title>
+
+    <style>
+        @font-face {
+            font-family: "GMarket Sans Bold";
+            src: url("./GmarketSansTTFBold.ttf");
+        }
+
+        @font-face {
+            font-family: "GMarket Sans Medium";
+            src: url("./GmarketSansTTFMedium.ttf");
+        }
+
+        @font-face {
+            font-family: "GMarket Sans Light";
+            src: url("./GmarketSansTTFLight.ttf");
+        }
+
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+
+        html, body {
+            width: 100vw;
+            height: 100vh;
+        }
+
+        html {
+            background: #001524;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+
+        .container {
+            width: 850px;
+            padding: 25px;
+            background: #FDE5D4;
+            border-radius: 5px;
+            user-select: none;
+        }
+
+        .container .container-flex {
+            display: flex;
+            justify-content: space-between;
+        }
+
+
+        .left-panel {
+            width: 300px;
+        }
+
+        .left-panel .selected-players .selected-player {
+            width: 100%;
+            height: 50px;
+            padding: 15px 15px;
+            border-radius: 5px;
+            background: #ecd6c7;
+            border: 1px solid #7a695e;
+            color: #001524;
+            font-family: "GMarket Sans Medium";
+            font-size: 16px;
+            margin-bottom: 5px;
+        }
+
+        .left-panel .selected-players .selected-player.blue::after {
+            content: '';
+            display: block;
+            position: absolute;
+            width: 25px;
+            height: 25px;
+            margin-top: -20px;
+            margin-left: 75px;
+            background: blue;
+        }
+
+        .left-panel .selected-players .selected-player.red::after {
+            content: '';
+            display: block;
+            position: absolute;
+            width: 25px;
+            height: 25px;
+            margin-top: -20px;
+            margin-left: 75px;
+            background: red;
+        }
+
+
+        .right-panel {
+            width: 300px;
+        }
+
+        .right-panel .unselected-players .unselected-player {
+            width: 100%;
+            height: 50px;
+            padding: 15px 15px;
+            border-radius: 5px;
+            background: #ecd6c7;
+            border: 1px solid #7a695e;
+            opacity: 0.5;
+            color: #001524;
+            font-family: "GMarket Sans Medium";
+            font-size: 16px;
+            margin-bottom: 5px;
+        }
+
+        .right-panel .unselected-players .unselected-player:last-child {
+            margin-bottom: 0;
+        }
+
+
+        .center-panel {
+            width: 50px;
+        }
+
+        .center-panel .numbers .number {
+            width: 100%;
+            height: 50px;
+            text-align: center;
+            padding: 15px 15px;
+            border-radius: 5px;
+            background: #445D48;
+            border: 1px solid #354638;
+            color: #FDE5D4;
+            font-family: "GMarket Sans Medium";
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+
+        .center-panel .numbers .number::before {
+            content: '';
+            display: block;
+            position: absolute;
+            width: 50px;
+            height: 1px;
+            margin-top: 7.5px;
+            margin-left: -80px;
+            background: #001524;
+        }
+
+
+        .btn-primary {
+            width: 100%;
+            padding: 15px 0;
+            border-radius: 5px;
+            background: #445D48;
+            border: 1px solid #354638;
+            color: #FDE5D4;
+            font-family: "GMarket Sans Light";
+            font-size: 16px;
+            transition: filter 0.2s, outline 0.2s;
+        }
+
+        .btn-primary:hover {
+            filter: brightness(1.05);
+        }
+
+        .btn-primary:active {
+            filter: brightness(0.95);
+        }
+
+        .btn-primary:focus {
+            outline: 3px solid rgba(53, 70, 56, 0.25);
+        }
+
+
+        .title {
+            font-family: "GMarket Sans Medium";
+            font-size: 26px;
+            margin-bottom: 25px;
+        }
+
+        .title .big {
+            font-family: "GMarket Sans Bold";
+            font-size: 38px;
+        }
+
+
+        .item {
+            position: absolute;
+            width: 150px;
+            height: 50px;
+            padding: 15px 15px;
+            border-radius: 5px;
+            background: #ecd6c7;
+            border: 1px solid #7a695e;
+            color: #001524;
+            font-family: "GMarket Sans Medium";
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <p class="title">아직 플레이어가 부족하군요!</p>
+
+        <div class="container-flex">
+            <div class="left-panel">
+                <div class="selected-players">
+                    <div class="selected-player">김도영</div>
+                    <div class="selected-player">김민혁</div>
+                    <div class="selected-player">고서온</div>
+                    <div class="selected-player">구본준</div>
+                    <div class="selected-player">김율</div>
+                </div>
+    
+                <button onclick="random()" class="btn-primary">고서온이 만듬 - 이 버튼 눌러야함</button>
+            </div>
+    
+            <div class="center-panel">
+                <div class="numbers">
+                    <div class="number">0</div>
+                    <div class="number">0</div>
+                    <div class="number">0</div>
+                    <div class="number">0</div>
+                    <div class="number">0</div>
+                </div>
+            </div>
+    
+            <div class="right-panel">
+                <div class="unselected-players">
+                    <div class="unselected-player">하성민</div>
+                    <div class="unselected-player">임승수</div>
+                    <div class="unselected-player">전채원</div>
+                    <div class="unselected-player">이소울</div>
+                    <div class="unselected-player">박세훈</div>
+                    <div class="unselected-player">이정진</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const selected_player = [`김도영`, `김민혁`, `고서온`, `구본준`, `김율`];
+        const unselected_player = [`하성민`, `임승수`, `전채원`, `이소울`, `박세훈`, `이정진`];
+        
+        let moving = false;
+        let lastText = ``;
+        let memberHalf = 0;
+
+        function judgment() {
+            let message = ``;
+
+            if (selected_player.length < 6) {
+                message = `랜덤으로 팀을 구성하기 위해선<br>플레이어 6명이 필요합니다!`;
+            }
+
+            if (selected_player.length === 6) {
+                message = `<span class="big">3 vs 3</span>`;
+                memberHalf = 3;
+            }
+
+            if (selected_player.length === 7) {
+                message = `<span class="big">4 vs 3</span> 근데 인원이 홀수에요!`;
+                memberHalf = 4
+            }
+
+            if (selected_player.length === 8) {
+                message = `<span class="big">4 vs 4</span>`;
+                memberHalf = 4
+            }
+
+            if (selected_player.length === 9) {
+                message = `<span class="big">5 vs 4</span> 근데 인원이 홀수에요!`;
+                memberHalf = 5
+            }
+
+            if (selected_player.length === 10) {
+                message = `<span class="big">5 vs 5</span> 자 두개재~`;
+                memberHalf = 5
+            }
+
+            if (selected_player.length > 10) {
+                message = `<span class="big">5 vs 5</span> 누구 하나는 꽝!`;
+                memberHalf = 5
+            }
+
+
+            document.querySelector(`.title`).innerHTML = message;
+        }
+
+        function judgmentItem(e) {
+            if ((e.target.classList.contains(`left-panel`) || e.target.classList.contains(`selected-player`) || e.target.classList.contains(`selected-players`)) && !selected_player.includes(lastText)) {
+                let idx = unselected_player.findIndex(e => e === lastText);
+                unselected_player.splice(idx, 1);
+                selected_player.push(lastText);
+            } else if ((e.target.classList.contains(`right-panel`) || e.target.classList.contains(`unselected-player`) || e.target.classList.contains(`unselected-players`)) && !unselected_player.includes(lastText)) {
+                let idx = selected_player.findIndex(e => e === lastText);
+                selected_player.splice(idx, 1);
+                unselected_player.push(lastText);
+            }
+
+            document.querySelector(`.selected-players`).innerHTML = ``;
+            selected_player.forEach(e => document.querySelector(`.selected-players`).innerHTML += `<div class="selected-player">${e}</div>`);
+
+            document.querySelector(`.unselected-players`).innerHTML = ``;
+            unselected_player.forEach(e => document.querySelector(`.unselected-players`).innerHTML += `<div class="unselected-player">${e}</div>`);
+
+            document.querySelector(`.numbers`).innerHTML = ``;
+            selected_player.forEach(e => document.querySelector(`.numbers`).innerHTML += `<div class="number">0</div>`);
+        }
+
+        function random() {
+            let arr = [];
+
+            for (let i = 0; i < memberHalf; i++) {
+                arr.push(1);
+            }
+
+            for (let i = 0; i < selected_player.length - memberHalf; i++) {
+                if (i + 1 + memberHalf > 10) {
+                    arr.push(2);
+                } else {
+                    arr.push(0);
+                }
+            }
+
+            arr = arr.sort(() => Math.random() - 0.5);
+
+            document.querySelectorAll(`.selected-player`).forEach(e => { e.classList.remove(`blue`); e.classList.remove(`red`); });
+
+            for (let i = 0; i < selected_player.length; i++) {
+                document.querySelectorAll(`.number`)[i].innerHTML = arr[i] === 2 ? `꽝` : arr[i];
+
+                if (arr[i] === 0) {
+                    document.querySelectorAll(`.selected-player`)[i].classList.add(`red`);
+                } else if (arr[i] !== 2) {
+                    document.querySelectorAll(`.selected-player`)[i].classList.add(`blue`);
+                }
+            }
+        }
+
+        document.onmousedown = e => {
+            if (e.target.classList.contains(`selected-player`) || e.target.classList.contains(`unselected-player`)) {
+                document.body.innerHTML += `<div class="item">${e.target.textContent}</div>`;
+                document.querySelector(`.item`).style.left = `${e.clientX + 10}px`;
+                document.querySelector(`.item`).style.top = `${e.clientY + 10}px`;
+
+                moving = true;
+                lastText = e.target.textContent;
+            }
+        }
+
+        document.onmousemove = e => {
+            if (moving) {
+                document.querySelector(`.item`).style.left = `${e.clientX + 10}px`;
+                document.querySelector(`.item`).style.top = `${e.clientY + 10}px`;
+            }
+        }
+
+        document.onmouseup = e => {
+            if (moving) {
+                document.querySelector(`.item`).remove();
+                
+                moving = false;
+                judgmentItem(e);
+                judgment();
+            }
+        }
+
+        judgment();
+    </script>
+</body>
+</html>
